@@ -2,7 +2,9 @@ package cn.draymonder.cloud.dao;
 
 import cn.draymonder.cloud.entity.Files;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.StatementType;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -56,4 +58,13 @@ public interface FileRelationDao {
             "values(#{files.fileId},#{files.ownerId},#{files.fileName},#{files.fileType},#{parent_id},#{files.createTime}," +
             "#{files.lastEditTime})")
     public int insertFileRelation(@Param("files")Files files, @Param("parent_id")int parentId);
+
+    // @Query(value = "call dfsSons(#{rootid}) ", nativeQuery = true)
+    @SuppressWarnings("rawtypes")
+    @Select("call dfsSons(#{rootid})")
+    @Options(statementType= StatementType.CALLABLE)
+    public HashMap getTableOfDelete(@Param("rootid") int parent_id);
+
+    @Select("select id from tmplist")
+    public List<Integer> selectNeedDeleteId();
 }

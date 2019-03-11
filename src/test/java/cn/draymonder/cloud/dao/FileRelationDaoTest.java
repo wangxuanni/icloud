@@ -1,13 +1,14 @@
 package cn.draymonder.cloud.dao;
 
+import cn.draymonder.cloud.entity.FileRelation;
 import cn.draymonder.cloud.entity.Files;
+import cn.draymonder.cloud.utils.FileTypeConstant;
 import cn.draymonder.cloud.utils.PathUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Date;
@@ -22,8 +23,20 @@ public class FileRelationDaoTest {
     @Autowired
     private FileRelationDao fileRelationDao;
 
-    @Autowired
-    private FileDao fileDao;
+//    @Autowired
+//    private FileDao fileDao;
+
+    @Test
+    public void testDelete() {
+        int parent_id = 7;
+        fileRelationDao.getTableOfDelete(parent_id);
+        List<Integer> lists = fileRelationDao.selectNeedDeleteId();
+        System.out.println(lists.size());
+        for(int i : lists) {
+            System.out.println("id"+i
+            );
+        }
+    }
 
     @Test
     @Ignore
@@ -51,7 +64,6 @@ public class FileRelationDaoTest {
 
     @Test
     @Ignore
-    @Rollback
     public void testInsert() {
         long times = System.currentTimeMillis();
         Files files = new Files();
@@ -70,4 +82,33 @@ public class FileRelationDaoTest {
         int nums = fileRelationDao.insertFileRelation(files, parentId);
         System.out.println(nums);
     }
+
+    @Test
+    @Ignore
+    public void testInsertFileAndRelation() {
+        Files files = new Files();
+        FileRelation fileRelation = new FileRelation();
+        long times = System.currentTimeMillis();
+        Date date = new Date(times);
+        for(int i=7; i<10; i++) {
+            files.setFileId(i);
+            files.setOwnerId(1);
+            files.setFileName("folder"+i);
+            files.setFileSize(0);
+            files.setFileType(FileTypeConstant.TYPE_CATEGORY);
+            files.setFilePath(PathUtil.getImgBasePath()+files.getFileName());
+            files.setMd5("0");
+            files.setCreateTime(date);
+            files.setLastEditTime(date);
+            // fileDao.insertFile(files);
+//            if(i == 7)
+//                fileRelationDao.insertFileRelation(files, 0);
+//            else
+//                fileRelationDao.insertFileRelation(files, );
+            fileRelationDao.insertFileRelation(files, 0);
+        }
+        System.out.println("yes");
+    }
+
+
 }
