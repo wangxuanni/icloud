@@ -63,4 +63,9 @@ public interface FileDao {
     @Select("select * from file where file_name like #{name}")
     public List<Files> selectFileByName(@Param("name") String fileName);
 
+    @Select("select * from file where file_name = #{name}")
+    public List<Files> selectFileByNormalName(@Param("name") String fileName);
+
+    @Select("select * from file where file_id = #{file_id}")
+    public Files selectFileByFileId(@Param("file_id") int fileId);
 }

@@ -34,6 +34,7 @@ public class UserController {
         if ((user = userService.getUser(name, pwd)) != null) {
             map.put("success", true);
             map.put("user", user);
+            // 放入session中
             req.getSession().setAttribute("user", user);
         } else {
             map.put("success", false);

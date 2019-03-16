@@ -2,7 +2,7 @@ package cn.draymonder.cloud.service;
 
 import cn.draymonder.cloud.entity.Files;
 import cn.draymonder.cloud.entity.User;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface FileService {
      * @param file
      * @return
      */
-    public boolean createFile(CommonsMultipartFile file, User user, String md5);
+    public int createFile(MultipartFile file, User user, String md5);
 
     /**
      * 删文件
@@ -30,4 +30,11 @@ public interface FileService {
      * @return
      */
     public List<Files> getFileByFilename(String filename);
+
+    /**
+     * 根据fileId获取相应的files 信息
+     * @param fileId
+     * @return
+     */
+    public Files getFileByFileId(int fileId);
 }

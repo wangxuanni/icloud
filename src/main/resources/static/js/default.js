@@ -1,4 +1,5 @@
-var footer = "<nav class='navbar navbar-default fixed-bottom justify-content-center' style='z-index:-1;'><div class='navbar-inner navbar-content-center text-center'><p>© 2018 Draymonder Copyright.&emsp;Powered by icloud.</p></div></nav>";
+var footer = "<nav class='navbar navbar-default fixed-bottom justify-content-center' style='z-index:-1;'><div class='navbar-inner navbar-content-center text-center'>" +
+    "<p>© 2018 Draymonder Copyright.&emsp;Powered by icloud.</p></div></nav>";
 
 var globalConfig = {};
 
