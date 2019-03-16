@@ -82,4 +82,23 @@ public class FilesController {
         }
         return modelMap;
     }
+
+    @RequestMapping("/all")
+    public Map<String, Object> getAllResources(HttpServletRequest req) {
+        Map<String, Object> modelMap = new HashMap<>();
+        User user = (User) req.getSession().getAttribute("user");
+        // 判断user是否存在
+        if (user == null || user.getUserId() <= 0) {
+            modelMap.put("success", false);
+            modelMap.put("state", FileEnum.NOT_LOGIN.getState());
+            modelMap.put("stateInfo", FileEnum.NOT_LOGIN.getStateInfo());
+            log.info(FileEnum.NOT_LOGIN.toString());
+            return modelMap;
+        }
+        List<Files> fileLists = fileRelationService.getFileListsByUser(user.getUserId(), 0);
+        modelMap.put("user", user);
+        modelMap.put("lists", fileLists);
+        return modelMap;
+    }
+
 }

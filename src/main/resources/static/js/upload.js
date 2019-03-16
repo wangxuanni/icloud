@@ -17,9 +17,14 @@ $("#file-input").fileinput({
     if (json.success === true) {
         alerts("上传成功");
     } else {
-        if(json.errMsg = "")
-        alerts(json.errMsg);
-
+        if (json.state == -1) {
+            alerts(json.stateInfo);
+            setTimeout( function(){
+                location.href = 'signin';
+            }, 3 * 1000 );
+        } else {
+            alerts(json.stateInfo);
+        }
         // alerts("上传失败，文件不合法");
     }
 });
