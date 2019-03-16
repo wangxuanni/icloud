@@ -45,7 +45,7 @@ public interface FileDao {
      * @return
      */
     @Select("select file_path from file where file_id = #{file_id} and owner_id = #{user_id}")
-    public String selectFilePath( @Param("user_id")int user_id, @Param("file_id")int file_id);
+    public String selectFilePath(@Param("user_id")int user_id, @Param("file_id")int file_id);
 
     /**
      * 查询user_id下的所有文件
@@ -54,4 +54,13 @@ public interface FileDao {
      */
     @Select("select * from file where owner_id = #{user_id}")
     public List<Files> selectFileByOwner(@Param("user_id")int user_id);
+
+    /**
+     * 根据相应的fileName 模糊搜索
+     * @param fileName
+     * @return
+     */
+    @Select("select * from file where file_name like #{name}")
+    public List<Files> selectFileByName(@Param("name") String fileName);
+
 }

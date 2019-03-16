@@ -13,7 +13,7 @@ public class PathUtil {
      * 获取根目录
      * @return
      */
-    public static String getImgBasePath() {
+    public static String getBasePath() {
         String os = System.getProperty("os.name");
         String basePath = "";
         if (os.toLowerCase().startsWith("win")) {

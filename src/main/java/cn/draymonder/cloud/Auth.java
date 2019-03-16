@@ -14,6 +14,5 @@ public class Auth {
     @ResponseBody
     public String auth() {
         return "Auth: draymonder<br> Email: 93958042@qq.com";
-
     }
 }

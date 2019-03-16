@@ -96,7 +96,7 @@ public class FileRelationDaoTest {
             files.setFileName("folder"+i);
             files.setFileSize(0);
             files.setFileType(FileTypeConstant.TYPE_CATEGORY);
-            files.setFilePath(PathUtil.getImgBasePath()+files.getFileName());
+            files.setFilePath(PathUtil.getBasePath()+files.getFileName());
             files.setMd5("0");
             files.setCreateTime(date);
             files.setLastEditTime(date);
